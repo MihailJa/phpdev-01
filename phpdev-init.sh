@@ -41,3 +41,8 @@ sudo apt install zsh -y
 
 echo 'Install oh-my-zsh...'
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" -y
+
+echo 'Reset pass for mysql_root...'
+sudo mysql -uroot eval UPDATE mysql.user SET plugin = 'mysql_native_password', authentication_string = '' WHERE user = 'root';
+
+sudo systemctl restart mysql.service
